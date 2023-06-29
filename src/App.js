@@ -71,8 +71,12 @@ class App extends Component {
       cartList.forEach((item, index) => {
         if (cartItemId === item.id) {
           const {...newItem} = item
-          newItem.quantity -= 1
-          cartList[index] = newItem
+          if (newItem.quantity > 1) {
+            newItem.quantity -= 1
+            cartList[index] = newItem
+          } else {
+            cartList.splice(index, 1)
+          }
         }
       })
       return {cartList: [...cartList]}
